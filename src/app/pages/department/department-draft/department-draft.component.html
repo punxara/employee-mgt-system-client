@@ -1,1 +1,24 @@
-<p>department-draft works!</p>
+<form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submit()">
+  <nz-form-item style="padding-bottom: 20px;">
+    <nz-form-control nzErrorTip="Please input department name!">
+<!--      <nz-input-group nzPrefixIcon="user">-->
+        <input type="text" nz-input formControlName="name" placeholder="Name" />
+<!--      </nz-input-group>-->
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item style="padding-bottom: 20px;">
+    <nz-form-control nzErrorTip="Please input department description!">
+<!--      <nz-input-group nzPrefixIcon="lock">-->
+        <input type="text" nz-input formControlName="description" placeholder="Description" />
+<!--      </nz-input-group>-->
+    </nz-form-control>
+  </nz-form-item>
+  <nz-row nzGutter="24">
+    <nz-col nzSpan="12" style="text-align: left">
+      <button nz-button class="login-form-button login-form-margin" [nzType]="'default'">Reset</button>
+    </nz-col>
+    <nz-col nzSpan="12" style="text-align: right">
+      <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" [nzLoading]="loading">Submit</button>
+    </nz-col>
+  </nz-row>
+</form>

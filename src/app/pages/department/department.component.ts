@@ -8,6 +8,7 @@ import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import { NzDrawerService} from "ng-zorro-antd/drawer";
 import {DepartmentDraftComponent} from "./department-draft/department-draft.component";
+import {NzTypographyComponent} from "ng-zorro-antd/typography";
 
 @Component({
   selector: 'app-department',
@@ -19,6 +20,7 @@ import {DepartmentDraftComponent} from "./department-draft/department-draft.comp
     NzColDirective,
     NzTableModule,
     NzButtonComponent,
+    NzTypographyComponent,
   ],providers:[
     NzDrawerService,
   ],
