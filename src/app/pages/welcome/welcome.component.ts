@@ -1,15 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from "@angular/core";
+import {Router} from "@angular/router";
+import {NzTabComponent, NzTabSetComponent} from "ng-zorro-antd/tabs";
+import {DepartmentComponent} from "../department/department.component";
+import {EmployeeComponent} from "../employee/employee.component";
 
 @Component({
   selector: 'app-welcome',
   standalone: true,
   templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.css']
+  imports: [
+    NzTabSetComponent,
+    NzTabComponent,
+    DepartmentComponent,
+    EmployeeComponent
+  ],
+  styleUrls: ['./welcome.component.css'],
+  styles: [
+    `
+      [nz-menu] {
+        width: 240px;
+      }
+    `
+  ]
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent {
 
-  constructor() { }
-
-  ngOnInit() { }
+  constructor(
+    protected router: Router
+  ) { }
 
 }

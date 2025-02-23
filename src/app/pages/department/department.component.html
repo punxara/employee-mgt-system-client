@@ -1,0 +1,35 @@
+<nz-row nzGutter="24">
+  <div nz-col nzSm="4" nzMd="6" nzLg="6" nzXl="6"></div>
+  <div nz-col nzXs="24" nzSm="16" nzMd="12" nzLg="12" nzXl="12">
+    <nz-row nzGutter="24" style="padding-bottom: 10px; text-align: right">
+      <nz-col nzSpan="24">
+        <button nz-button nzType="primary" (click)="openDrawer(false)">
+          + Add new
+        </button>
+      </nz-col>
+    </nz-row>
+    <nz-table #basicTable [nzData]="departments">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (data of basicTable.data; track data) {
+          <tr>
+            <td>{{ data.name }}</td>
+            <td>{{ data.description }}</td>
+            <td>
+              <a>Edit</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a>Delete</a>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </nz-table>
+  </div>
+  <div nz-col nzSm="4" nzMd="6" nzLg="6" nzXl="6"></div>
+</nz-row>
