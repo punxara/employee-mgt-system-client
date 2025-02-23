@@ -1,9 +1,8 @@
-import {Component, inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {NzFormControlComponent, NzFormDirective} from "ng-zorro-antd/form";
 import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
 import {NzInputDirective, NzInputGroupComponent} from "ng-zorro-antd/input";
 import {
-  NonNullableFormBuilder,
   ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
@@ -12,7 +11,7 @@ import {
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzTypographyComponent} from "ng-zorro-antd/typography";
 import {AuthenticationService} from "./authentication.service";
-import {response} from "express";
+import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
@@ -37,11 +36,13 @@ export class AuthenticationComponent {
   // @ts-ignore
   validateForm: UntypedFormGroup;
   loading = false;
+  private IS_LOGGED_IN = 'IS_LOGGED_IN';
 
   constructor(
     private untypedFormBuilder: UntypedFormBuilder,
     private authenticationService: AuthenticationService,
     private message: NzMessageService,
+    private router: Router,
   ) {
     this.initForm();
   }
@@ -58,11 +59,16 @@ export class AuthenticationComponent {
       this.loading = true;
       this.authenticationService.logIn(this.validateForm.controls['username'].value, this.validateForm.controls['password'].value)
         .subscribe(response => {
-          if (response){
-            console.log(response)
-            // this.message.create("success", "Successfully updated!");
+          this.loading = false;
+          if (!!response?.status){
+            this.message.create("success", "Logged in successfully!");
+            localStorage.setItem(this.IS_LOGGED_IN, 'Y');
+            this.router.navigate([`/welcome`]);
+          } else {
+            this.message.create("error", "Login failed.");
           }
         }, error => {
+          this.loading = false;
           this.message.create("error", error.error.message);
         })
     } else {
