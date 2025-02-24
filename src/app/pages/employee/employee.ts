@@ -9,5 +9,5 @@ export class Employee {
   departmentName?: string;
   department?: Department;
   isActive?: boolean;
-  imageUrl?: string;
+  imageUrl?: FormData;
 }

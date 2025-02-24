@@ -30,6 +30,7 @@
         <th>Position</th>
         <th>Department</th>
         <th>Status</th>
+        <th>Image</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -43,6 +44,9 @@
             <td>
               <nz-tag *ngIf="data.isActive" nzColor="success">Active</nz-tag>
               <nz-tag *ngIf="!data.isActive" nzColor="error">Inactive</nz-tag>
+            </td>
+            <td>
+              <input type="file" (change)="onFileSelect($event, data)" accept="image/*" />
             </td>
             <td>
               <a (click)="openDrawer(true, data)">Edit</a>

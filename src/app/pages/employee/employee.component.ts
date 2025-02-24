@@ -19,6 +19,7 @@ import {NzTagComponent} from "ng-zorro-antd/tag";
 import {NgIf} from "@angular/common";
 import {NzInputDirective} from "ng-zorro-antd/input";
 import {FormsModule} from "@angular/forms";
+import {response} from "express";
 
 @Component({
   selector: 'app-employee',
@@ -120,6 +121,22 @@ export class EmployeeComponent implements OnInit {
       }
     } else {
       this.employees = this.employees.filter(i => i._id !== $event['response'].data._id);
+    }
+  }
+
+  onFileSelect(event: any, employee: Employee) {
+    const file: File = event.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('image', file);
+      this.service.upload(formData, employee)
+        .subscribe(response => {
+
+          console.log('File uploaded successfully:', response);
+          this.message.create("success", 'File uploaded successfully');
+        }, error => {
+          this.message.create("error", error.error.message);
+        })
     }
   }
 }
