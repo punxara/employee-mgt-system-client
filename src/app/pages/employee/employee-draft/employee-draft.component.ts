@@ -104,6 +104,7 @@ export class EmployeeDraftComponent implements OnInit {
       this.obj.password = this.validateForm.controls['password'].value;
       this.obj.position = this.validateForm.controls['position'].value;
       this.obj.department = this.departments.find(dpt => dpt.name === this.validateForm.controls['department'].value);
+      this.obj.departmentName = this.departments.find(dpt => dpt.name === this.validateForm.controls['department'].value).name;
       this.service.update(this.obj)
         .subscribe(response => {
           this.loadingSave = false;

@@ -3,12 +3,23 @@
   <div nz-col nzXs="24" nzSm="20" nzMd="20" nzLg="20" nzXl="20">
     <nz-row nzGutter="24" style="padding-bottom: 10px;">
       <nz-col nzSpan="18">
-        <!--        <h4 style="padding-bottom: 0" nz-typography>Departments</h4>-->
+<!--        <input nz-input placeholder="Basic usage" [(ngModel)]="value" type="text" />-->
       </nz-col>
       <nz-col nzSpan="6" style="text-align: right">
         <button nz-button nzType="primary" (click)="openDrawer(false, null)">
           + Add new
         </button>
+      </nz-col>
+    </nz-row>
+    <nz-row nzGutter="24" style="padding-bottom: 10px;">
+      <nz-col nzXs="12" nzSm="12" nzMd="8" nzLg="8" nzXl="8">
+        <input nz-input nzSize="small" placeholder="⌕ Name" [(ngModel)]="_name" type="text" (ngModelChange)="getAllEmployees()"/>
+      </nz-col>
+      <nz-col nzXs="12" nzSm="12" nzMd="8" nzLg="8" nzXl="8">
+        <input nz-input nzSize="small" placeholder="⌕ Position" [(ngModel)]="_position" type="text" (ngModelChange)="getAllEmployees()"/>
+      </nz-col>
+      <nz-col nzXs="12" nzSm="12" nzMd="8" nzLg="8" nzXl="8">
+        <input nz-input nzSize="small" placeholder="⌕ Department" [(ngModel)]="_department" type="text" (ngModelChange)="getAllEmployees()"/>
       </nz-col>
     </nz-row>
     <nz-table #basicTable [nzData]="employees" [nzPageIndex]="1" [nzPageSize]="5" [nzTotal]="employees.length">

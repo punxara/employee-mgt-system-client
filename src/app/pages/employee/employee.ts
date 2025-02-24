@@ -6,6 +6,7 @@ export class Employee {
   username?: string;
   password?: string;
   position?: string;
+  departmentName?: string;
   department?: Department;
   isActive?: boolean;
 }

@@ -17,6 +17,9 @@ import {EmployeeService} from "./employee.service";
 import {EmployeeDraftComponent} from "./employee-draft/employee-draft.component";
 import {NzTagComponent} from "ng-zorro-antd/tag";
 import {NgIf} from "@angular/common";
+import {NzDropdownMenuComponent} from "ng-zorro-antd/dropdown";
+import {NzInputDirective} from "ng-zorro-antd/input";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-employee',
@@ -33,7 +36,9 @@ import {NgIf} from "@angular/common";
     NzTheadComponent,
     NzTrDirective,
     NzTagComponent,
-    NgIf
+    NgIf,
+    NzInputDirective,
+    FormsModule,
   ],
   providers: [
     NzDrawerService,
@@ -45,6 +50,12 @@ export class EmployeeComponent implements OnInit {
 
   employees: Employee[] = [];
   loading = false;
+  searchValue = '';
+  visible = false;
+
+  _name = '';
+  _position = '';
+  _department = '';
 
   constructor(
     private service: EmployeeService,
@@ -54,9 +65,23 @@ export class EmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getAllEmployees();
+  }
+
+  getAllEmployees() {
     this.employees = [];
     this.loading = true;
-    this.service.getAll()
+    let filters: any[] = [];
+    if (this._name){
+      filters.push({name: this._name})
+    }
+    if (this._position){
+      filters.push({position: this._position})
+    }
+    if (this._department){
+      filters.push({departmentName: this._department})
+    }
+    this.service.getAll(filters)
       .subscribe(response => {
         this.loading = false;
         this.employees = response.data;
@@ -101,4 +126,16 @@ export class EmployeeComponent implements OnInit {
     }
   }
 
+  reset(): void {
+    this.searchValue = '';
+    this.getAllEmployees();
+  }
+
+  search(): void {
+    this.visible = false;
+    const searchTerm = this.searchValue.toLowerCase();
+    this.employees = this.employees.filter((item: Employee) =>
+      item.name.toLowerCase().includes(searchTerm)
+    );
+  }
 }

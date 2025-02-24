@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BASE_API_URL} from "../../api/api-url";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Employee} from "./employee";
 
@@ -16,8 +16,8 @@ export class EmployeeService {
   ) {
   }
 
-  public getAll(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/getAll`);
+  public getAll(filters): Observable<any> {
+    return this.http.post(`${this.apiUrl}/getAll`, filters);
   }
 
   public create(employee: Employee): Observable<any> {
