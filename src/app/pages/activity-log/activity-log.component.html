@@ -27,7 +27,7 @@
 <!--  <div nz-col nzSm="2" nzMd="2" nzLg="2" nzXl="2"></div>-->
 <!--</nz-row>-->
 
-<nz-list nzBordered style="height: calc(90vh - 150px);">
+<nz-list *ngIf="+logs.length > 0" nzBordered style="height: calc(90vh - 150px);">
   @for (item of logs; track item) {
     <nz-list-item>
       <nz-row nzGutter="24" style="width: 100%">
@@ -67,4 +67,6 @@
     </nz-list-item>
   }
 </nz-list>
-<!--<nz-pagination [nzPageIndex]="1" [nzPageSize]="5" [nzTotal]="logs.length"></nz-pagination>-->
+
+<nz-result *ngIf="+logs.length <= 0" nzStatus="404" nzTitle="Not Found." nzSubTitle="Sorry, currenly there is no any activity logs.">
+</nz-result>

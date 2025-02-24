@@ -20,6 +20,7 @@ import {ActivityLogService} from "./activity-log.service";
 import {NzListComponent, NzListItemComponent} from "ng-zorro-antd/list";
 import {NzTypographyComponent} from "ng-zorro-antd/typography";
 import {NzPaginationComponent} from "ng-zorro-antd/pagination";
+import {NzResultComponent} from "ng-zorro-antd/result";
 
 @Component({
   selector: 'app-activity-log',
@@ -43,7 +44,8 @@ import {NzPaginationComponent} from "ng-zorro-antd/pagination";
     NzListItemComponent,
     DatePipe,
     NzTypographyComponent,
-    NzPaginationComponent
+    NzPaginationComponent,
+    NzResultComponent
   ],
   templateUrl: './activity-log.component.html',
   styleUrl: './activity-log.component.css'

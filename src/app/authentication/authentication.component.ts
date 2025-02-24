@@ -40,6 +40,7 @@ export class AuthenticationComponent {
   loading = false;
   loadingSave = false;
   private IS_LOGGED_IN = 'IS_LOGGED_IN';
+  private LOGGED_EMP_ID = 'LOGGED_EMP_ID';
 
   constructor(
     private untypedFormBuilder: UntypedFormBuilder,
@@ -68,6 +69,7 @@ export class AuthenticationComponent {
             this.message.create("success", "Logged in successfully!");
             this.updateEmployeeStatus(response.data)
             localStorage.setItem(this.IS_LOGGED_IN, 'Y');
+            localStorage.setItem(this.LOGGED_EMP_ID, response.data._id);
             this.router.navigate([`/welcome`]);
           } else {
             this.message.create("error", "Login failed.");

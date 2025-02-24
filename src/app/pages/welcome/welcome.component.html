@@ -1,7 +1,13 @@
 <nz-tabset nzCentered>
   <nz-tab nzTitle="Home">
-    Welcome
-<!--    <app-welcome></app-welcome>-->
+    <nz-result nzIcon="smile-twotone" nzTitle="Welcome!"
+               nzSubTitle="You have logged in succsefully. Contune with employee, department managements.">
+    </nz-result>
+    <nz-row nzGutter="24" style="text-align: center">
+      <nz-col nzSpan="24">
+        <button nz-button nzType="dashed" nzDanger (click)="logout()" [nzLoading]="loading">Log Out</button>
+      </nz-col>
+    </nz-row>
   </nz-tab>
   <nz-tab nzTitle="Departments">
     <app-department></app-department>
