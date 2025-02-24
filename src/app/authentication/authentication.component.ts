@@ -13,6 +13,9 @@ import {NzTypographyComponent} from "ng-zorro-antd/typography";
 import {AuthenticationService} from "./authentication.service";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {EmployeeService} from "../pages/employee/employee.service";
+import {Employee} from "../pages/employee/employee";
+import {response} from "express";
 
 @Component({
   selector: 'app-authentication',
@@ -36,6 +39,7 @@ export class AuthenticationComponent {
   // @ts-ignore
   validateForm: UntypedFormGroup;
   loading = false;
+  loadingSave = false;
   private IS_LOGGED_IN = 'IS_LOGGED_IN';
 
   constructor(
@@ -43,6 +47,7 @@ export class AuthenticationComponent {
     private authenticationService: AuthenticationService,
     private message: NzMessageService,
     private router: Router,
+    private employeeService: EmployeeService,
   ) {
     this.initForm();
   }
@@ -62,6 +67,7 @@ export class AuthenticationComponent {
           this.loading = false;
           if (!!response?.status){
             this.message.create("success", "Logged in successfully!");
+            this.updateEmployeeStatus(response.data)
             localStorage.setItem(this.IS_LOGGED_IN, 'Y');
             this.router.navigate([`/welcome`]);
           } else {
@@ -79,5 +85,18 @@ export class AuthenticationComponent {
         }
       });
     }
+  }
+
+  updateEmployeeStatus(emp: Employee){
+    this.loadingSave = true;
+    emp.isActive = true;
+    this.employeeService.update(emp)
+      .subscribe(response => {
+        this.loadingSave = false;
+        console.log(`Employee : ${response.data.name} logged in.`)
+      }, error => {
+        this.loadingSave = false;
+        this.message.create("error", error.error.message);
+      })
   }
 }

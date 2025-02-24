@@ -23,7 +23,8 @@ import {NzPaginationComponent} from "ng-zorro-antd/pagination";
     NzButtonComponent,
     NzTypographyComponent,
     NzPaginationComponent,
-  ], providers: [
+  ],
+  providers: [
     NzDrawerService,
   ],
   templateUrl: './department.component.html',
@@ -68,7 +69,7 @@ export class DepartmentComponent implements OnInit {
     });
 
     drawerRef.afterClose.subscribe(data => {
-        this.updateTable(data);
+      this.updateTable(data);
     });
   }
 
@@ -84,6 +85,4 @@ export class DepartmentComponent implements OnInit {
       this.departments = this.departments.filter(i => i._id !== $event['response'].data._id);
     }
   }
-
-
 }
