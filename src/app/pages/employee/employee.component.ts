@@ -87,16 +87,10 @@ export class EmployeeComponent implements OnInit {
   updateTable($event) {
     if ($event['isRemoved'] === 'N') {
       const index = this.employees.findIndex(i => i._id === $event['response'].data._id);
-
-      // Assuming you have a list of departments available
-      // const department = this.departments.find(d => d._id === $event['response'].data.department);
-
-      // Assign department object if found
       const updatedEmployee = {
         ...$event['response'].data,
-        department: $event['response'].data.department, // Fallback to ID if department not found
+        department: $event['response'].data.department,
       };
-
       if (index > -1) {
         Object.assign(this.employees[index], updatedEmployee);
       } else {

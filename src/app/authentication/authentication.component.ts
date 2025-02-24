@@ -15,7 +15,6 @@ import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {EmployeeService} from "../pages/employee/employee.service";
 import {Employee} from "../pages/employee/employee";
-import {response} from "express";
 
 @Component({
   selector: 'app-authentication',
@@ -65,7 +64,7 @@ export class AuthenticationComponent {
       this.authenticationService.logIn(this.validateForm.controls['username'].value, this.validateForm.controls['password'].value)
         .subscribe(response => {
           this.loading = false;
-          if (!!response?.status){
+          if (!!response?.status) {
             this.message.create("success", "Logged in successfully!");
             this.updateEmployeeStatus(response.data)
             localStorage.setItem(this.IS_LOGGED_IN, 'Y');
@@ -81,13 +80,13 @@ export class AuthenticationComponent {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
+          control.updateValueAndValidity({onlySelf: true});
         }
       });
     }
   }
 
-  updateEmployeeStatus(emp: Employee){
+  updateEmployeeStatus(emp: Employee) {
     this.loadingSave = true;
     emp.isActive = true;
     this.employeeService.update(emp)
