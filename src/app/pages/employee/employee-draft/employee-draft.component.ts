@@ -9,10 +9,9 @@ import {NzDrawerRef} from "ng-zorro-antd/drawer";
 import {Employee} from "../employee";
 import {EmployeeService} from "../employee.service";
 import {DepartmentService} from "../../department/department.service";
-import {response} from "express";
 import {Department} from "../../department/department";
 import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-employee-draft',
@@ -27,7 +26,8 @@ import {NgForOf} from "@angular/common";
     NzButtonComponent,
     NzSelectComponent,
     NzOptionComponent,
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   templateUrl: './employee-draft.component.html',
   styleUrl: './employee-draft.component.css'
@@ -94,7 +94,6 @@ export class EmployeeDraftComponent implements OnInit {
       this.validateForm.controls['department'].disable();
     }
   }
-
 
   submit() {
     this.loadingSave = true;
