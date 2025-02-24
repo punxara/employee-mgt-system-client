@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {NzTabComponent, NzTabSetComponent} from "ng-zorro-antd/tabs";
 import {DepartmentComponent} from "../department/department.component";
 import {EmployeeComponent} from "../employee/employee.component";
+import {ActivityLogComponent} from "../activity-log/activity-log.component";
 
 @Component({
   selector: 'app-welcome',
@@ -12,7 +13,8 @@ import {EmployeeComponent} from "../employee/employee.component";
     NzTabSetComponent,
     NzTabComponent,
     DepartmentComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    ActivityLogComponent
   ],
   styleUrls: ['./welcome.component.css'],
   styles: [
