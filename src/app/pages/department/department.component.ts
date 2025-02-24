@@ -6,9 +6,10 @@ import {DepartmentService} from "./department.service";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
 import {NzButtonComponent} from "ng-zorro-antd/button";
-import { NzDrawerService} from "ng-zorro-antd/drawer";
+import {NzDrawerService} from "ng-zorro-antd/drawer";
 import {DepartmentDraftComponent} from "./department-draft/department-draft.component";
 import {NzTypographyComponent} from "ng-zorro-antd/typography";
+import {NzPaginationComponent} from "ng-zorro-antd/pagination";
 
 @Component({
   selector: 'app-department',
@@ -21,7 +22,8 @@ import {NzTypographyComponent} from "ng-zorro-antd/typography";
     NzTableModule,
     NzButtonComponent,
     NzTypographyComponent,
-  ],providers:[
+    NzPaginationComponent,
+  ], providers: [
     NzDrawerService,
   ],
   templateUrl: './department.component.html',
@@ -35,7 +37,6 @@ export class DepartmentComponent implements OnInit {
   constructor(
     private service: DepartmentService,
     private message: NzMessageService,
-    // private drawerRef: NzDrawerRef,
     private nzDrawerService: NzDrawerService
   ) {
   }
@@ -53,12 +54,13 @@ export class DepartmentComponent implements OnInit {
       })
   }
 
-  openDrawer(isEdit: boolean): void {
+  openDrawer(isEdit: boolean, obj: Department): void {
     const drawerRef = this.nzDrawerService.create<DepartmentDraftComponent>({
-      nzTitle: isEdit ? 'Edit Department' : 'Create Department',
+      nzTitle: (isEdit && obj) ? 'Edit Department' : (!isEdit && obj) ? 'Delete Department' : 'New Department',
       nzContent: DepartmentDraftComponent,
       nzData: {
-        isEdit: isEdit
+        isEdit: isEdit,
+        obj: obj
       }
     });
 
@@ -66,7 +68,22 @@ export class DepartmentComponent implements OnInit {
     });
 
     drawerRef.afterClose.subscribe(data => {
-      console.log(data);
+        this.updateTable(data);
     });
   }
+
+  updateTable($event) {
+    if ($event['isRemoved'] === 'N') {
+      const index = this.departments.findIndex(i => i._id === $event['response'].data._id);
+      if (index > -1) {
+        Object.assign(this.departments[index], $event['response'].data);
+      } else {
+        this.departments = [$event['response'].data, ...this.departments];
+      }
+    } else {
+      this.departments = this.departments.filter(i => i._id !== $event['response'].data._id);
+    }
+  }
+
+
 }

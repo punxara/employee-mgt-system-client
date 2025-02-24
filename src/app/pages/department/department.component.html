@@ -2,16 +2,16 @@
   <div nz-col nzSm="4" nzMd="6" nzLg="6" nzXl="6"></div>
   <div nz-col nzXs="24" nzSm="16" nzMd="12" nzLg="12" nzXl="12">
     <nz-row nzGutter="24" style="padding-bottom: 10px;">
-      <nz-col nzSpan="19">
-<!--        <h4 style="padding-bottom: 0" nz-typography>Departments</h4>-->
+      <nz-col nzSpan="18">
+        <!--        <h4 style="padding-bottom: 0" nz-typography>Departments</h4>-->
       </nz-col>
-      <nz-col nzSpan="5" style="text-align: right">
-        <button nz-button nzType="primary" (click)="openDrawer(false)">
+      <nz-col nzSpan="6" style="text-align: right">
+        <button nz-button nzType="primary" (click)="openDrawer(false, null)">
           + Add new
         </button>
       </nz-col>
     </nz-row>
-    <nz-table #basicTable [nzData]="departments">
+    <nz-table #basicTable [nzData]="departments" [nzPageIndex]="1" [nzPageSize]="5" [nzTotal]="departments.length">
       <thead>
       <tr>
         <th>Name</th>
@@ -25,9 +25,9 @@
             <td>{{ data.name }}</td>
             <td>{{ data.description }}</td>
             <td>
-              <a>Edit</a>
+              <a (click)="openDrawer(true, data)">Edit</a>
               <nz-divider nzType="vertical"></nz-divider>
-              <a>Delete</a>
+              <a (click)="openDrawer(false, data)">Delete</a>
             </td>
           </tr>
         }
