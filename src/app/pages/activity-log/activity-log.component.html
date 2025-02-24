@@ -27,7 +27,18 @@
 <!--  <div nz-col nzSm="2" nzMd="2" nzLg="2" nzXl="2"></div>-->
 <!--</nz-row>-->
 
-<nz-list *ngIf="+logs.length > 0" nzBordered style="height: calc(90vh - 150px);">
+<nz-row nzGutter="24" style="padding-bottom: 10px;">
+  <nz-col nzSpan="18">
+  </nz-col>
+  <nz-col nzSpan="6" style="text-align: right">
+    <button nz-button nzType="default" (click)="refresh()">
+      Refresh
+    </button>
+  </nz-col>
+</nz-row>
+<nz-spin *ngIf="loading" nzTip="Loading...">
+</nz-spin>
+<nz-list *ngIf="(+logs.length > 0) && !loading" nzBordered style="height: calc(90vh - 150px);" [nzLoading]="loading">
   @for (item of logs; track item) {
     <nz-list-item>
       <nz-row nzGutter="24" style="width: 100%">

@@ -3,6 +3,7 @@ import {NzButtonComponent} from "ng-zorro-antd/button";
 import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
 import {NzDividerComponent} from "ng-zorro-antd/divider";
 import {
+  NzCellFixedDirective,
   NzTableCellDirective,
   NzTableComponent,
   NzTbodyComponent,
@@ -39,6 +40,7 @@ import {response} from "express";
     NgIf,
     NzInputDirective,
     FormsModule,
+    NzCellFixedDirective,
   ],
   providers: [
     NzDrawerService,

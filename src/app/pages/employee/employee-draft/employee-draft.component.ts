@@ -57,7 +57,7 @@ export class EmployeeDraftComponent implements OnInit {
       username: this.untypedFormBuilder.control('', [Validators.required]),
       password: this.untypedFormBuilder.control('', [Validators.required]),
       position: this.untypedFormBuilder.control('', [Validators.required]),
-      department: this.untypedFormBuilder.control('', [Validators.required]),
+      department: this.untypedFormBuilder.control(''),
     });
   }
 

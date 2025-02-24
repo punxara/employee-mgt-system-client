@@ -21,6 +21,8 @@ import {NzListComponent, NzListItemComponent} from "ng-zorro-antd/list";
 import {NzTypographyComponent} from "ng-zorro-antd/typography";
 import {NzPaginationComponent} from "ng-zorro-antd/pagination";
 import {NzResultComponent} from "ng-zorro-antd/result";
+import {NzSpinComponent} from "ng-zorro-antd/spin";
+import {NzAlertComponent} from "ng-zorro-antd/alert";
 
 @Component({
   selector: 'app-activity-log',
@@ -45,7 +47,9 @@ import {NzResultComponent} from "ng-zorro-antd/result";
     DatePipe,
     NzTypographyComponent,
     NzPaginationComponent,
-    NzResultComponent
+    NzResultComponent,
+    NzSpinComponent,
+    NzAlertComponent
   ],
   templateUrl: './activity-log.component.html',
   styleUrl: './activity-log.component.css'
@@ -62,6 +66,10 @@ export class ActivityLogComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getAllLogs();
+  }
+
+  getAllLogs(){
     this.logs = [];
     this.loading = true;
     this.service.getAll()
@@ -72,5 +80,9 @@ export class ActivityLogComponent implements OnInit {
         this.loading = false;
         this.message.create("error", error.error.message);
       })
+  }
+
+  refresh(){
+    this.getAllLogs();
   }
 }
